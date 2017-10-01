@@ -4,9 +4,9 @@ namespace WrapperCore
 {
 	public static class Class1
 	{
-		static void Main(string[] args)
+		public static void Log()
 		{
-
+			System.Diagnostics.Debug.WriteLine("HI");
 		}
 
 		public static string Hi => "GOOO";

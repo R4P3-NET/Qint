@@ -18,7 +18,11 @@ namespace Qint.Desktop
 	{
 		public MainForm()
 		{
-			
+			this.ClientSize = new Size(600, 400);
+
+			this.Title = "Hello, Eto.Forms: " + Class1.Hi;
+
+			Class1.Log();
 		}
 	}
 }

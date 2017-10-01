@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using WrapperCore;
 
 namespace Qint
 {
@@ -13,7 +14,8 @@ namespace Qint
 		{
 			InitializeComponent();
 
-			namedeinerwahl.Text = WrapperCore.Class1.Hi;
+			namedeinerwahl.Text = Class1.Hi;
+			Class1.Log();
 		}
 	}
 }
