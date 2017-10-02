@@ -7,6 +7,20 @@
     <StartupObject />
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard1.3|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="lib\bindingstest.dll" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="lib\bindingstest.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
   <ItemGroup>
     <None Update="test.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
