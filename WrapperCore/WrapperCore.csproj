@@ -9,6 +9,10 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard1.3|AnyCPU'">
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Framework)' == 'net46'">
+    <DefineConstants>NET46</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,9 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="test.tt">
+    <None Update="BookDeclarations.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>test.cs</LastGenOutput>
+      <LastGenOutput>BookDeclarations.cs</LastGenOutput>
     </None>
   </ItemGroup>
 
@@ -33,10 +37,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="test.cs">
+    <Compile Update="BookDeclarations.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
-      <DependentUpon>test.tt</DependentUpon>
+      <DependentUpon>BookDeclarations.tt</DependentUpon>
     </Compile>
   </ItemGroup>
 

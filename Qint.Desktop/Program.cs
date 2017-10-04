@@ -20,9 +20,9 @@ namespace Qint.Desktop
 		{
 			this.ClientSize = new Size(600, 400);
 
-			this.Title = "Hello, Eto.Forms: " + WrapperCore.CoreTest.Hi;
+			this.Title = "Qint";
 
-			WrapperCore.CoreTest.Log();
+			
 		}
 	}
 }

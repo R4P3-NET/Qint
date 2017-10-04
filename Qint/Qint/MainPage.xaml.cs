@@ -14,8 +14,8 @@ namespace Qint
 		{
 			InitializeComponent();
 
-			namedeinerwahl.Text = CoreTest.Hi;
-			CoreTest.Log();
+			namedeinerwahl.Text = Core.Hi;
+			Core.Log();
 		}
 	}
 }
