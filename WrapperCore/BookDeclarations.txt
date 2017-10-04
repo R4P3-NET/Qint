@@ -1,8 +1,4 @@
-﻿Struct: Connection; id:[Connection.Id]
-Default: get:true, set:true
-Prop: Id, ConnectionId
-
-Struct: ClientNetwork; get:false
+﻿Struct: ClientNetwork; get:false
 Default: get:true, set:true
 Prop: Ping, f32
 
@@ -56,162 +52,163 @@ Prop: hostmessage, str
 Prop: hostmessage_mode, HostMessageMode
 
 Struct: Server
-builder.name("id").type_s("ServerId").result(false).initialisation("id").should_update(false).finalize(),
-builder_string.name("uid").value_name("UniqueIdentifier").finalize(),
-builder.name("own_connection_id").type_s("ConnectionId").update("Self::query_own_connection_id(self.id)").finalize(),
-builder_string.name("name").finalize(),
-builder_string.name("phonetic_name").value_name("NamePhonetic").finalize(),
-builder_string.name("platform").finalize(),
-builder_string.name("version").finalize(),
-builder.name("created").type_s("DateTime<UTC>").update("Ok(UTC::now())").finalize(),
-builder.name("codec_encryption_mode").type_s("CodecEncryptionMode").finalize(),
-builder.name("default_server_group").type_s("Permissions").update("Ok(Permissions)").finalize(),
-builder.name("default_channel_group").type_s("Permissions").update("Ok(Permissions)").finalize(),
-builder.name("default_channel_admin_group").type_s("Permissions").update("Ok(Permissions)").finalize(),
-builder_string.name("hostbanner_url").finalize(),
-builder_string.name("hostbanner_gfx_url").finalize(),
-builder.name("hostbanner_gfx_interval").type_s("Duration").finalize(),
-builder.name("hostbanner_mode").type_s("HostbannerMode").finalize(),
-builder_i32.name("priority_speaker_dimm_modificator").finalize(),
-builder_string.name("hostbutton_tooltip").finalize(),
-builder_string.name("hostbutton_url").finalize(),
-builder_string.name("hostbutton_gfx_url").finalize(),
-builder_i32.name("icon_id").finalize(),
-builder_i32.name("reserved_slots").finalize(),
-builder.name("ask_for_privilegekey").type_s("bool").finalize(),
-builder.name("channel_temp_delete_delay_default").type_s("Duration").finalize(),
-builder.name("visible_connections").type_s("Map<ConnectionId, Connection>").result(false).initialisation("Map::new()").update("Self::query_connections(self.id)").finalize(),
-builder.name("channels").type_s("Map<ChannelId, Channel>").update("Self::query_channels(self.id)").finalize(),
-builder.name("optional_data").type_s("OptionalServerData").result(false).initialisation("OptionalServerData::new(id)").update("OptionalServerData::new(self.id)").finalize(),
+Prop: Id, ServerId
+Prop: Uid, str; doc:"UniqueIdentifier"
+Prop: OwnConnectionId, ConnectionId
+Prop: Name, str
+Prop: PhoneticName, str
+Prop: Platform, str
+Prop: Version, str
+Prop: Created, DateTime; doc:"???"
+Prop: CodecEncryptionMode, CodecEncryptionMode
+Prop: DefaultServerGroup, ServerGroupId; doc:"???"
+Prop: DefaultChannelGroup, ChannelGroupId; doc:"???"
+Prop: DefaultChannelAdminGroup, ChannelGroupId; doc:"???"
+Prop: HostbannerUrl, str
+Prop: HostbannerGfxUrl, str
+Prop: HostbannerGfxInterval, TimeSpan
+Prop: HostbannerMode, HostBannerMode
+Prop: PrioritySpeakerDimmModificator, i32
+Prop: HostbuttonTooltip, str
+Prop: HostbuttonUrl, str
+Prop: HostbuttonGfxUrl, str
+Prop: IconId, i32
+Prop: ReservedSlots, i32
+Prop: AskForPrivilegekey, bool
+Prop: ChannelTempDeleteDelayDefault, TimeSpan
+Nested: VisibleConnections, object[], doc:"???"
+Nested: Channels, object[], doc:"???"
+Nested: OptionalData, OptionalServerData
 
 Struct: OptionalChannelData
-builder_optional_data.name("channel_id").type_s("ChannelId").result(false).finalize(),
-builder_optional_data.name("server_id").type_s("ServerId").result(false).finalize(),
-builder_optional_data.name("description").type_s("String").finalize(),
+Prop: ChannelId, ChannelId; doc:"result(false)"
+Prop: ServerId, ServerId; doc:"result(false)"
+Prop: Description, str
 
 Struct: Channel
-builder.name("id").type_s("ChannelId").result(false).finalize(),
-builder.name("server_id").type_s("ServerId").result(false).finalize(),
-builder.name("parent_channel_id").type_s("ChannelId").update("Self::query_parent_channel_id(self.server_id, self.id)").documentation("The id of the parent channel, 0 if there is no parent channel").finalize(),
-builder_string.name("name").finalize(),
-builder_string.name("topic").finalize(),
-builder.name("codec").type_s("CodecType").finalize(),
-builder_i32.name("codec_quality").finalize(),
-builder_i32.name("max_clients").finalize(),
-builder_i32.name("max_family_clients").finalize(),
-builder_i32.name("order").finalize(),
-builder_bool.name("permanent").value_name("FlagPermanent").finalize(),
-builder_bool.name("semi_permanent").value_name("FlagSemiPermanent").finalize(),
-builder_bool.name("default").value_name("FlagDefault").finalize(),
-builder_bool.name("password").value_name("FlagPassword").finalize(),
-builder_i32.name("codec_latency_factor").finalize(),
-builder_bool.name("codec_is_unencrypted").finalize(),
-builder_i32.name("delete_delay").finalize(),
-builder_bool.name("max_clients_unlimited").value_name("FlagMaxClientsUnlimited").finalize(),
-builder_bool.name("max_family_clients_unlimited").value_name("FlagMaxFamilyClientsUnlimited").finalize(),
+Prop: Id, ChannelId
+Prop: ServerId, ServerId
+Prop: ParentChannelId, ChannelId
+Prop: Name, str
+Prop: Topic, str
+Prop: Codec, Codec
+Prop: CodecQuality, i32
+Prop: MaxClients, i32
+Prop: MaxFamilyClients, i32
+Prop: Order, i32
+Prop: Permanent, bool; doc:"FlagPermanent"
+Prop: SemiPermanent, bool; doc:"FlagSemiPermanent"
+Prop: Default, bool; doc:"FlagDefault"
+Prop: Password, bool; doc:"FlagPassword"
+Prop: CodecLatencyFactor, i32
+Prop: CodecIsUnencrypted, bool
+Prop: DeleteDelay, i32
+Prop: MaxClientsUnlimited, bool; doc:"FlagMaxClientsUnlimited"
+Prop: MaxFamilyClientsUnlimited, bool; doc:"FlagMaxFamilyClientsUnlimited"
 ::Clone so we can change the documentation
-builder_bool.name("subscribed").value_name("FlagAreSubscribed").documentation("Whether we are subscribed to this channel").finalize(),
-builder_i32.name("needed_talk_power").finalize(),
-builder_i32.name("forced_silence").finalize(),
-builder_string.name("phonetic_name").value_name("NamePhonetic").finalize(),
-builder_i32.name("icon_id").finalize(),
-builder_bool.name("private").value_name("FlagPrivate").finalize(),
-builder.name("optional_data").type_s("OptionalChannelData").initialisation("OptionalChannelData::new(server_id, id)").update("OptionalChannelData::new(self.server_id, self.id)").result(false).finalize(),
+Prop: Subscribed, bool; doc:"FlagAreSubscribed"
+Prop: NeededTalkPower, i32
+Prop: ForcedSilence, i32
+Prop: PhoneticName, str
+Prop: IconId, i32
+Prop: Private, bool; doc:"FlagPrivate"
+Nested: OptionalData, OptionalChannelData
 
 Struct: OwnConnectionData
-builder_string.name("server_ip").finalize(),
-builder.name("server_port").type_s("u16").finalize(),
-builder.name("input_deactivated").type_s("InputDeactivationStatus").finalize(),
-builder.name("default_channel").type_s("ChannelId").finalize(),
-builder_string.name("default_token").finalize(),
+Prop: ServerIp, str
+Prop: ServerPort, u16
+Prop: InputDeactivated, bool; doc:"InputDeactivationStatus???"
+Prop: DefaultChannel, ChannelId
+Prop: DefaultToken, str
 
 Struct: ServerqueryConnectionData
-builder_string.name("name").finalize(),
-builder_string.name("password").finalize(),
+Prop: Name, str
+Prop: Password, str
 
 Struct: OptionalConnectionData
-builder.name("id").type_s("ConnectionId").result(false).finalize(),
-builder.name("server_id").type_s("ServerId").result(false).finalize(),
-builder_string.name("version").finalize(),
-builder_string.name("platform").finalize(),
-builder.name("created").type_s("DateTime<UTC>").finalize(),
-builder.name("last_connected").type_s("DateTime<UTC>").finalize(),
-builder_i32.name("total_connection").finalize(),
-builder.name("ping").type_s("Duration").finalize(),
-builder.name("ping_deviation").type_s("Duration").finalize(),
-builder.name("connected_time").type_s("Duration").finalize(),
-builder.name("idle_time").type_s("Duration").finalize(),
-builder_string.name("client_ip").finalize(),
-builder.name("client_port").type_s("u16").update("Self::get_connection_property_as_uint64(server_id, id, ConnectionProperties::ClientPort) as u16").finalize(),
+Prop: Id, ConnectionId
+Prop: ServerId, ServerId
+Prop: Version, str
+Prop: Platform, str
+Prop: Created, DateTime; doc:"???"
+Prop: LastConnected, DateTime; doc:"???"
+Prop: TotalConnection, i32
+Prop: Ping, float
+Prop: PingDeviation, float
+Prop: ConnectedTime, TimeSpan
+Prop: IdleTime, TimeSpan
+Prop: ClientIp, str
+Prop: ClientPort, u16
 ::Network
-builder_u64.name("packets_sent_speech").finalize(),
-builder_u64.name("packets_sent_keepalive").finalize(),
-builder_u64.name("packets_sent_control").finalize(),
-builder_u64.name("packets_sent_total").finalize(),
-builder_u64.name("bytes_sent_speech").finalize(),
-builder_u64.name("bytes_sent_keepalive").finalize(),
-builder_u64.name("bytes_sent_control").finalize(),
-builder_u64.name("bytes_sent_total").finalize(),
-builder_u64.name("packets_received_speech").finalize(),
-builder_u64.name("packets_received_keepalive").finalize(),
-builder_u64.name("packets_received_control").finalize(),
-builder_u64.name("packets_received_total").finalize(),
-builder_u64.name("bytes_received_speech").finalize(),
-builder_u64.name("bytes_received_keepalive").finalize(),
-builder_u64.name("bytes_received_control").finalize(),
-builder_u64.name("bytes_received_total").finalize(),
-builder_u64.name("packetloss_speech").finalize(),
-builder_u64.name("packetloss_keepalive").finalize(),
-builder_u64.name("packetloss_control").finalize(),
-builder_u64.name("packetloss_total").finalize(),
+Prop: PacketsSentSpeech, u64
+Prop: PacketsSentKeepalive, u64
+Prop: PacketsSentControl, u64
+Prop: PacketsSentTotal, u64
+Prop: BytesSentSpeech, u64
+Prop: BytesSentKeepalive, u64
+Prop: BytesSentControl, u64
+Prop: BytesSentTotal, u64
+Prop: PacketsReceivedSpeech, u64
+Prop: PacketsReceivedKeepalive, u64
+Prop: PacketsReceivedControl, u64
+Prop: PacketsReceivedTotal, u64
+Prop: BytesReceivedSpeech, u64
+Prop: BytesReceivedKeepalive, u64
+Prop: BytesReceivedControl, u64
+Prop: BytesReceivedTotal, u64
+Prop: PacketlossSpeech, u64
+Prop: PacketlossKeepalive, u64
+Prop: PacketlossControl, u64
+Prop: PacketlossTotal, u64
 ::TODO much more...
 ::End network
-builder_i32.name("month_bytes_uploaded").finalize(),
-builder_i32.name("month_bytes_downloaded").finalize(),
-builder_i32.name("total_bytes_uploaded").finalize(),
-builder_i32.name("total_bytes_downloaded").finalize(),
-client_b_string.name("default_channel_password").finalize(),
-client_b_string.name("server_password").finalize(),
-client_b.name("is_muted").type_s("bool").documentation("If the client is locally muted.").finalize(),
-client_b_i32.name("volume_modificator").finalize(),
-client_b.name("version_sign").type_s("bool").finalize(),
-client_b.name("avatar").type_s("bool").value_name("FlagAvatar").finalize(),
-client_b_string.name("description").finalize(),
-client_b.name("talker").type_s("bool").value_name("IsTalker").finalize(),
-client_b.name("priority_speaker").type_s("bool").value_name("IsPrioritySpeaker").finalize(),
-client_b.name("unread_messages").type_s("bool").finalize(),
-client_b_i32.name("needed_serverquery_view_power").finalize(),
-client_b_i32.name("icon_id").finalize(),
-client_b.name("is_channel_commander").type_s("bool").finalize(),
-client_b_string.name("country").finalize(),
-client_b_string.name("badges").finalize(),
+Prop: MonthBytesUploaded, i32
+Prop: MonthBytesDownloaded, i32
+Prop: TotalBytesUploaded, i32
+Prop: TotalBytesDownloaded, i32
+Prop: DefaultChannelPassword, str
+Prop: ServerPassword, str
+Prop: IsMuted, bool
+Prop: VolumeModificator, i32
+Prop: VersionSign, bool
+Prop: Avatar, str; doc:"str??? FlagAvatar"
+Prop: Description, str
+Prop: Talker, bool; doc:"bool??? IsTalker"
+Prop: PrioritySpeaker, bool; doc:"bool??? IsPrioritySpeaker"
+Prop: UnreadMessages, bool
+Prop: NeededServerqueryViewPower, i32
+Prop: IconId, i32
+Prop: IsChannelCommander, bool
+Prop: Country, str
+Prop: Badges, str
 
-Struct:Connection
-builder.name("id").type_s("ConnectionId").result(false).finalize(),
-builder.name("server_id").type_s("ServerId").result(false).finalize(),
-builder.name("channel_id").type_s("ChannelId").update("Self::query_channel_id(self.server_id, self.id)").finalize(),
+Struct:Connection; id:[Connection.Id]
+Default: get:true, set:true
+Prop: Id, ConnectionId
+Prop: ServerId, ServerId
+Prop: ChannelId, ChannelId
 ::ClientProperties
-client_b_string.name("uid").value_name("UniqueIdentifier").finalize(),
-client_b_string.name("name").value_name("Nickname").finalize(),
-client_b.name("talking").type_s("TalkStatus").value_name("FlagTalking").finalize(),
-client_b.name("whispering").type_s("bool").update("Self::query_whispering(self.server_id, self.id)").finalize(),
-client_b.name("away").type_s("AwayStatus").finalize(),
-client_b_string.name("away_message").finalize(),
-client_b.name("input_muted").type_s("MuteInputStatus").finalize(),
-client_b.name("output_muted").type_s("MuteOutputStatus").finalize(),
-client_b.name("output_only_muted").type_s("MuteOutputStatus").finalize(),
-client_b.name("input_hardware").type_s("HardwareInputStatus").finalize(),
-client_b.name("output_hardware").type_s("HardwareOutputStatus").finalize(),
-client_b_string.name("phonetic_name").value_name("NicknamePhonetic").finalize(),
-client_b.name("recording").type_s("bool").value_name("IsRecording").finalize(),
-client_b.name("database_id").type_s("Permissions").documentation("Only valid data if we have the appropriate permissions.").finalize(),
-client_b.name("channel_group_id").type_s("Permissions").finalize(),
-client_b.name("server_groups").type_s("Vec<Permissions>").finalize(),
-client_b.name("talk_power").type_s("i32").finalize(),
+Prop: Uid, str; doc:"UniqueIdentifier"
+Prop: Name, str; doc:"Nickname"
+Prop: Talking, bool; doc:"??? FlagTalking"
+Prop: Whispering, bool
+Prop: Away, bool; doc:"AwayStatus???"
+Prop: AwayMessage, str
+Prop: InputMuted, bool; doc:"MuteInputStatus???"
+Prop: OutputMuted, bool; doc:"MuteOutputStatus???"
+Prop: OutputOnlyMuted, bool; doc:"MuteOutputStatus???"
+Prop: InputHardware, bool; doc:"HardwareInputStatus???"
+Prop: OutputHardware, bool; doc:"HardwareOutputStatus???"
+Prop: PhoneticName, str; doc:"NicknamePhonetic"
+Prop: Recording, bool; doc:"bool??? IsRecording"
+Prop: DatabaseId, u64
+Prop: ChannelGroupId, ulong; doc: "???"
+Prop: ServerGroups, u64[]; doc:"???"
+Prop: TalkPower, i32
 ::When this client requested to talk
-client_b.name("talk_request").type_s("DateTime<UTC>").finalize(),
-client_b.name("talk_request_message").type_s("String").value_name("TalkRequestMsg").finalize(),
-client_b.name("channel_group_inherited_channel_id").type_s("ChannelId").documentation("The channel that sets the current channel id of this client.").finalize(),
-client_b.name("own_data").type_s("Option<OwnConnectionData>").result(false).documentation("Only set for oneself").finalize(),
-client_b.name("serverquery_data").type_s("Option<ServerqueryConnectionData>").result(false).documentation("Only available for serverqueries").finalize(),
-client_b.name("optional_data").type_s("OptionalConnectionData").result(false).finalize(),
+Prop: TalkRequest, bool; doc:"???"
+Prop: TalkRequestMessage, str; doc:"??? TalkRequestMsg"
+Prop: ChannelGroupInheritedChannelId, ChannelId
+Nested: OwnData, OwnData
+Nested: ServerqueryData, ServerqueryData
+Nested: OptionalData, OptionalConnectionData

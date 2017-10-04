@@ -22,15 +22,16 @@ using f32 = System.Single;
 using f64 = System.Double;
 using str = System.String;
 
+using ServerId = System.UInt64;
 using ConnectionId = System.UInt64;
-using ClientUidT = System.String;
-using ClientDbIdT = System.UInt64;
+using ClientUid = System.String;
+using ClientDbId = System.UInt64;
 using ClientId = System.UInt16;
-using ChannelIdT = System.UInt64;
-using ServerGroupIdT = System.UInt64;
-using ChannelGroupIdT = System.UInt64;
-using TimeSpanSecondsT = System.TimeSpan;
-using TimeSpanMillisecT = System.TimeSpan;
+using ChannelId = System.UInt64;
+using ServerGroupId = System.UInt64;
+using ChannelGroupId = System.UInt64;
+using TimeSpanSeconds = System.TimeSpan;
+using TimeSpanMillisec = System.TimeSpan;
 
 #pragma warning disable IDE1006
 
@@ -136,10 +137,17 @@ foreach(var struc in structList)
 	Write($"\tpublic sealed class {struc.name}\n\t{{\n");
 
 	Prop[] ids;
+	string para;
+	string paraCom;
+	string paraVal;
+	string paraValCom;
 	if(struc.values.id != null)
 	{
 		ids = struc.values.id.TrimStart('[').TrimEnd(']').Split(new []{" "}, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).Select(Find).ToArray();
-		var para = string.Join(", ", ids.Select(prop => $"{prop.type} {prop.struc}{prop.name}"));
+		para = string.Join(", ", ids.Select(prop => $"{prop.type} {prop.struc}{prop.name}"));
+		paraVal = string.Join(", ", ids.Select(prop => $"{prop.struc}{prop.name}"));
+		paraCom = para + ", ";
+		paraValCom = paraVal + ", ";
 
 		WriteLine($"\t\tpublic {struc.name}({para})\n\t\t{{");
 		foreach(var prop in ids)
@@ -153,7 +161,14 @@ foreach(var struc in structList)
 		}
 		WriteLine("");
 	}
-	else ids = new Prop[0];
+	else 
+	{
+		ids = new Prop[0];
+		para = "";
+		paraCom = "";
+		paraVal = "";
+		paraValCom = "";
+	}
 
 	foreach(var prop in propList)
 	{
@@ -165,21 +180,21 @@ foreach(var struc in structList)
 		string getstr = null;
 		if(prop.values.pget.Value) {
 			getstr = $"get_{ToSnake(struc.name)}_{ToSnake(prop.name)}";
-			Write($"\t\t[DllImport(\"{dllName}\")] private static extern {prop.type} {getstr}();\n");
+			Write($"\t\t[DllImport(\"{dllName}\")] private static extern {prop.type} {getstr}({para});\n");
 		}
 		string setstr = null;
 		if(prop.values.pset.Value) {
 			setstr = $"set_{ToSnake(struc.name)}_{ToSnake(prop.name)}";
-			Write($"\t\t[DllImport(\"{dllName}\")] private static extern {prop.type} {setstr}({prop.type} {prop.name});\n");
+			Write($"\t\t[DllImport(\"{dllName}\")] private static extern {prop.type} {setstr}({paraCom}{prop.type} {prop.name});\n");
 		}
 
 		if(prop.values.doc != null)
 			WriteLine("\t\t" + ToDoc(Unquote(prop.values.doc)));
 		Write($"\t\tpublic {prop.type} {prop.name} {{ ");
 		if(prop.values.pget.Value)
-			Write($"get => {getstr}(); ");
+			Write($"get => {getstr}({paraVal}); ");
 		if(prop.values.pset.Value)
-			Write($"set => {setstr}(value); ");
+			Write($"set => {setstr}({paraValCom}value); ");
 		Write($"}}\n");
 	}
 
