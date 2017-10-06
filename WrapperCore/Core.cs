@@ -11,6 +11,7 @@ namespace WrapperCore
 	{
 		const string libpath = "lib/";
 
+		//[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
 		[DllImport("bindingstest", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
 		public static extern int get();
 
