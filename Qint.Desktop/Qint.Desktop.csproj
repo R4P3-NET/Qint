@@ -4,7 +4,8 @@
     <TargetFrameworks>net46</TargetFrameworks>
     <ApplicationIcon>Qint.ico</ApplicationIcon>
     <OutputType>WinExe</OutputType>
-    <StartupObject />
+    <StartupObject>Qint.Desktop.Program</StartupObject>
+    <RunCommand>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).exe</RunCommand>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net46|AnyCPU'">
@@ -48,6 +49,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\WrapperCore\Qint.Wrapper.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Qint.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Tree.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
