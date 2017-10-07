@@ -22,6 +22,10 @@
     </PackageReference>
     <PackageReference Include="Eto.Platform.Windows" Version="2.3.0">
     </PackageReference>
+    <PackageReference Include="Eto.Platform.Gtk" Version="2.3.0">
+    </PackageReference>
+    <PackageReference Include="Eto.Platform.Gtk3" Version="2.3.0">
+    </PackageReference>
   </ItemGroup>
 
 </Project>
