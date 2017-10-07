@@ -35,7 +35,7 @@ using TimeSpanMillisec = System.TimeSpan;
 
 #pragma warning disable IDE1006
 
-namespace WrapperCore.Dto
+namespace Qint.Wrapper.Dto
 {
 	public sealed class ClientNetwork
 	{
@@ -658,6 +658,27 @@ namespace WrapperCore.Dto
 		[DllImport("tslib")] private static extern ChannelId get_connection_channel_group_inherited_channel_id(ConnectionId ConnectionId);
 		[DllImport("tslib")] private static extern ChannelId set_connection_channel_group_inherited_channel_id(ConnectionId ConnectionId, ChannelId ChannelGroupInheritedChannelId);
 		public ChannelId ChannelGroupInheritedChannelId { get => get_connection_channel_group_inherited_channel_id(ConnectionId); set => set_connection_channel_group_inherited_channel_id(ConnectionId, value); }
+	}
+
+	public sealed class ChatEntryTmp
+	{
+		public ChatEntryTmp(ClientId ChatEntryTmpSenderClientId, ConnectionId ConnectionId)
+		{
+			this.ChatEntryTmpSenderClientId = this.ChatEntryTmpSenderClientId;
+			this.ConnectionId = this.ConnectionId;
+		}
+		public ClientId ChatEntryTmpSenderClientId { get; }
+		public ConnectionId ConnectionId { get; }
+
+		[DllImport("tslib")] private static extern str get_chat_entry_tmp_text(ClientId ChatEntryTmpSenderClientId, ConnectionId ConnectionId);
+		[DllImport("tslib")] private static extern str set_chat_entry_tmp_text(ClientId ChatEntryTmpSenderClientId, ConnectionId ConnectionId, str Text);
+		public str Text { get => get_chat_entry_tmp_text(ChatEntryTmpSenderClientId, ConnectionId); set => set_chat_entry_tmp_text(ChatEntryTmpSenderClientId, ConnectionId, value); }
+		[DllImport("tslib")] private static extern DateTime get_chat_entry_tmp_date(ClientId ChatEntryTmpSenderClientId, ConnectionId ConnectionId);
+		[DllImport("tslib")] private static extern DateTime set_chat_entry_tmp_date(ClientId ChatEntryTmpSenderClientId, ConnectionId ConnectionId, DateTime Date);
+		public DateTime Date { get => get_chat_entry_tmp_date(ChatEntryTmpSenderClientId, ConnectionId); set => set_chat_entry_tmp_date(ChatEntryTmpSenderClientId, ConnectionId, value); }
+		[DllImport("tslib")] private static extern TextMessageTargetMode get_chat_entry_tmp_mode(ClientId ChatEntryTmpSenderClientId, ConnectionId ConnectionId);
+		[DllImport("tslib")] private static extern TextMessageTargetMode set_chat_entry_tmp_mode(ClientId ChatEntryTmpSenderClientId, ConnectionId ConnectionId, TextMessageTargetMode Mode);
+		public TextMessageTargetMode Mode { get => get_chat_entry_tmp_mode(ChatEntryTmpSenderClientId, ConnectionId); set => set_chat_entry_tmp_mode(ChatEntryTmpSenderClientId, ConnectionId, value); }
 	}
 
 

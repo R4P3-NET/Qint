@@ -35,7 +35,7 @@ using TimeSpanMillisec = System.TimeSpan;
 
 #pragma warning disable IDE1006
 
-namespace WrapperCore.Dto
+namespace Qint.Wrapper.Dto
 {
 <#
 const string dllName = "tslib";

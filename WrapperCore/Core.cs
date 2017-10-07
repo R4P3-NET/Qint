@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
-namespace WrapperCore
+namespace Qint.Wrapper
 {
 	public class Core
 	{
@@ -49,5 +49,14 @@ namespace WrapperCore
 		}
 
 		public static string Hi => "GOOO" + get();
+	}
+
+	public class ChatEntry
+	{
+		string Text;
+		DateTime Date;
+		TextMessageTargetMode Mode;
+		ushort SenderClientId;
+		ulong SenderConnectionId;
 	}
 }

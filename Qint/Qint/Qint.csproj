@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\WrapperCore\WrapperCore.csproj" />
+    <ProjectReference Include="..\..\WrapperCore\Qint.Wrapper.csproj" />
   </ItemGroup>
 
   <ItemGroup>

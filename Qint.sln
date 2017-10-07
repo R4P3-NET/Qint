@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qint.iOS", "Qint\Qint.iOS\Q
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "mobile", "mobile", "{9222FE4D-8F86-467C-9A0A-1719992AB3DB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WrapperCore", "WrapperCore\WrapperCore.csproj", "{7C4A45C6-A454-4123-A81B-8A57DE12AE71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qint.Wrapper", "WrapperCore\Qint.Wrapper.csproj", "{7C4A45C6-A454-4123-A81B-8A57DE12AE71}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Qint.Desktop", "Qint.Desktop\Qint.Desktop.csproj", "{C1A3EC93-9400-453C-85D4-6A944692715E}"
 EndProject

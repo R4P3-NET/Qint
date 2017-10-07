@@ -7,7 +7,7 @@
 // You should have received a copy of the Open Software License along with this
 // program. If not, see <https://opensource.org/licenses/OSL-3.0>.
 
-namespace WrapperCore
+namespace Qint.Wrapper
 {
 	// http://media.teamspeak.com/ts3_literature/TeamSpeak%203%20Server%20Query%20Manual.pdf
 	// public_definitions.h from the ts3 plugin library
@@ -68,6 +68,8 @@ namespace WrapperCore
 		Channel,
 		/// <summary>Target is a virtual server.</summary>
 		Server,
+		/// <summary>(Unofficial) Target is a client as poke.</summary>
+		Poke,
 	}
 
 	public enum LogLevel

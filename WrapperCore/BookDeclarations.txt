@@ -212,3 +212,9 @@ Prop: ChannelGroupInheritedChannelId, ChannelId
 Nested: OwnData, OwnData
 Nested: ServerqueryData, ServerqueryData
 Nested: OptionalData, OptionalConnectionData
+
+Struct: ChatEntryTmp; id:[ChatEntryTmp.SenderClientId Connection.Id]
+Prop: Text, str
+Prop: Date, DateTime
+Prop: Mode, TextMessageTargetMode
+Prop: SenderClientId, ClientId

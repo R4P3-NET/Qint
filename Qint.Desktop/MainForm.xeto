@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Form
+	xmlns="http://schema.picoe.ca/eto.forms"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:qint="clr-namespace:Qint.Desktop;assembly=Qint.Desktop"
+	Title="Qint"
+	ClientSize="500, 350">
+
+	<StackLayout Orientation="Horizontal">
+		<StackLayoutItem>
+			<StackLayout Orientation="Vertical">
+				<ImageView ID="ServerTreeToggle" Size="32, 32" MouseDown="ToggleTreeView"></ImageView>
+			</StackLayout>
+		</StackLayoutItem>
+		<StackLayoutItem>
+			<Label ID="ServerTree" BackgroundColor="Aqua">Tree</Label>
+		</StackLayoutItem>
+		<StackLayoutItem Expand="True">
+			<!--<Label ID="Content" BackgroundColor="Green">Content</Label>-->
+			<qint:ChatModule ID="Content"></qint:ChatModule>
+		</StackLayoutItem>
+		<StackLayoutItem>
+			<StackLayout Orientation="Vertical">
+				<Label ID="ChannelView" BackgroundColor="PaleGreen" Text="{Binding Text}"></Label>
+				<Button Click="Modify"></Button>
+			</StackLayout>
+		</StackLayoutItem>
+	</StackLayout>
+</Form>
