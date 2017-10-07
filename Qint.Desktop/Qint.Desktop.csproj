@@ -34,14 +34,15 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFramework)' == 'net46'">
-    <PackageReference Include="Eto.Forms">
-      <Version>2.3.0</Version>
+    <PackageReference Include="Eto.Forms" Version="2.3.0">
     </PackageReference>
-    <PackageReference Include="Eto.Platform.Direct2D">
-      <Version>2.3.0</Version>
+    <PackageReference Include="Eto.Platform.Direct2D" Version="2.3.0">
     </PackageReference>
-    <PackageReference Include="Eto.Platform.Windows">
-      <Version>2.3.0</Version>
+    <PackageReference Include="Eto.Platform.Windows" Version="2.3.0">
+    </PackageReference>
+    <PackageReference Include="Eto.Platform.Gtk" Version="2.3.0">
+    </PackageReference>
+    <PackageReference Include="Eto.Platform.Gtk3" Version="2.3.0">
     </PackageReference>
   </ItemGroup>
 

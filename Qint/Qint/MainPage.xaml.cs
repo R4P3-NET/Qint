@@ -16,6 +16,7 @@ namespace Qint
 
 			namedeinerwahl.Text = Core.Hi;
 			Core.Log();
+
 		}
 	}
 }

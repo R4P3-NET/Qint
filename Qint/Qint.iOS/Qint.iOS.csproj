@@ -27,6 +27,7 @@
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <MtouchExtraArgs>-gcc_flags "-L${ProjectDir} -lresolv -force_load ${ProjectDir}/libbindingstest.a"</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -51,6 +52,7 @@
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchExtraArgs>-gcc_flags "-L${ProjectDir} -force_load ${ProjectDir}/libbindingstest.a"</MtouchExtraArgs>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -97,6 +99,7 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork@2x" />
     <None Include="packages.config" />
+    <None Include="libbindingstest.a" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -136,7 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Qint\Qint.csproj">
-      <Project>{fa6ddd25-d232-4d09-b817-fa9ae3eb6908}</Project>
+      <Project>{7DD6DB95-4CFE-46DF-8E81-B6ED3844DBC0}</Project>
       <Name>Qint</Name>
     </ProjectReference>
   </ItemGroup>
