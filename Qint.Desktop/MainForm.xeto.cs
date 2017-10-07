@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.ComponentModel;
 using System.Collections.Generic;
 using Eto.Forms;
@@ -10,32 +12,54 @@ namespace Qint.Desktop
 	public class MainForm : Form
 	{
 		public SampleData data;
+		public TreeItemCollection tdata;
+
+#pragma warning disable CS0649
+		TreeView testTree;
+		Control channelView;
+		ImageView serverTreeToggle;
+#pragma warning restore CS0649
 
 		public MainForm()
 		{
 			XamlReader.Load(this);
 
-			//var nav = new Navigation();
-
 			Icon = new Icon("Qint.ico");
 
-			var ServerTreeToggle = (ImageView)FindChild("ServerTreeToggle");
-			ServerTreeToggle.Image = new Bitmap(new Bitmap("Tree.png"), ServerTreeToggle.Width, ServerTreeToggle.Height, ImageInterpolation.High);
+			serverTreeToggle.Image = new Bitmap(new Bitmap("Tree.png"), serverTreeToggle.Width, serverTreeToggle.Height, ImageInterpolation.High);
 
-			var item = FindChild("ChannelView");
-			item.DataContext = data = new SampleData();
+			channelView.DataContext = data = new SampleData();
+
+			DataContext = tdata = new TreeItemCollection
+			{
+				new TreeItem() { Text = "HI" },
+				new TreeItem() { Text = "HI2" }
+			};
+
+			testTree.DataStore = tdata;
+			//testTree.BindDataContext(c => c.DataStore, (TreeItemCollection t) => t);
+			//testTree.BindDataContext(t => t.DataStore, )
+
+			testTree.BindDataContext(c => c.DataStore, (MyTree m) => m.TreeItems);
 		}
 
 		public void ToggleTreeView(object sender, MouseEventArgs args)
 		{
-			var elem = FindChild("ServerTree");
-			elem.Visible = !elem.Visible;
+			testTree.Visible = !testTree.Visible;
 		}
 
 		public void Modify(object sender, EventArgs args)
 		{
 			data.Modify();
+
+			tdata.Add(new TreeItem() { Text = "HI" });
+			testTree.RefreshData();
 		}
+	}
+
+	class MyTree
+	{
+		public TreeItemCollection TreeItems { get; set; }
 	}
 
 	public class SampleData : INotifyPropertyChanged

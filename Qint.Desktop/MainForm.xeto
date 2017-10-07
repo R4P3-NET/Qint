@@ -9,19 +9,20 @@
 	<StackLayout Orientation="Horizontal">
 		<StackLayoutItem>
 			<StackLayout Orientation="Vertical">
-				<ImageView ID="ServerTreeToggle" Size="32, 32" MouseDown="ToggleTreeView"></ImageView>
+				<ImageView x:Name="serverTreeToggle" Size="32, 32" MouseDown="ToggleTreeView"></ImageView>
 			</StackLayout>
 		</StackLayoutItem>
 		<StackLayoutItem>
-			<Label ID="ServerTree" BackgroundColor="Aqua">Tree</Label>
+			<!--<Label ID="Content" BackgroundColor="Green">Content</Label>-->
+			<TreeView x:Name="testTree"></TreeView>
 		</StackLayoutItem>
 		<StackLayoutItem Expand="True">
 			<!--<Label ID="Content" BackgroundColor="Green">Content</Label>-->
-			<qint:ChatModule ID="Content"></qint:ChatModule>
+			<qint:ChatModule x:Name="chatModule"></qint:ChatModule>
 		</StackLayoutItem>
 		<StackLayoutItem>
 			<StackLayout Orientation="Vertical">
-				<Label ID="ChannelView" BackgroundColor="PaleGreen" Text="{Binding Text}"></Label>
+				<Label x:Name="channelView" BackgroundColor="PaleGreen" Text="{Binding Text}"></Label>
 				<Button Click="Modify"></Button>
 			</StackLayout>
 		</StackLayoutItem>

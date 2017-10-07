@@ -6,60 +6,46 @@ using Eto.Serialization.Xaml;
 using System.Collections.ObjectModel;
 
 namespace Qint.Desktop
-{	
+{
 	public class ChatModule : Panel
-	{	
+	{
+		ObservableCollection<TextObj> data;
+		
+#pragma warning disable CS0649
+		ListBox chatBox;
+		ChatModule chatModule;
+#pragma warning restore CS0649
+
 		public ChatModule()
 		{
 			XamlReader.Load(this);
 
-			var collection = new ObservableCollection<TextObj>
-			{
-				new TextObj { Key = "Row 1", Text = "Row 1", Check = true },
-				new TextObj { Key = "Row 2", Text = "Row 2", Check = false }
-			};
+			data = new ObservableCollection<TextObj> { new TextObj("Hellox"), new TextObj("Theres") };
 
-			var data = new ObservableCollection<string> { "Hello", "There" };
-
-			var listBox = FindChild<ListBox>("ChatEntryList");
-			//list.DataStore = collection;
-
-			//list.Items.Add(new ListItem { Text = "Item "});
-			//list.Items.Add(new TextObj { Key = "Row 2", Text = "Row 2", Check = false });
-
-			//list.pu
-			//list.Bindings.Add(new TextBoxCell())
-			//var listBox = new ListBox();
-			listBox.BindDataContext(c => c.DataStore, (MyModel m) => m.ListItems);
-
-			// button to change the data context
-			var changeDataContext = new Button { Text = "Change Data Context" };
-			//changeDataContext.Click += (sender, e) => DataContext = new MyModel { ListItems = new List<string> { "Some", "Other", "Items" } };
-			changeDataContext.Click += (sender, e) => { data.Add("more"); };
-
-			Content = new TableLayout
-			{
-				Rows =
-				{
-					changeDataContext,
-					listBox
-				}
-			};
-
-			// set initial data context for all controls of the form
+			chatBox.BindDataContext(c => c.DataStore, (MyModel m) => m.ListItems);
+			
 			DataContext = new MyModel { ListItems = data };
+		}
+
+		public void AddMore(object sender, EventArgs args)
+		{
+			data.Add(new TextObj("more"));
 		}
 	}
 
 	class MyModel
 	{
-		public ObservableCollection<string> ListItems { get; set; }
+		public ObservableCollection<TextObj> ListItems { get; set; }
 	}
 
 	class TextObj
 	{
-		public string Key { get; set; }
 		public string Text { get; set; }
 		public bool Check { get; set; }
+
+		public TextObj() { }
+		public TextObj(string text) { Text = text; }
+
+		public override string ToString() => "To " + Text;
 	}
 }
