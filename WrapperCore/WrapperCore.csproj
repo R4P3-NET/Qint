@@ -4,7 +4,6 @@
     <TargetFrameworks>netstandard1.3;netcoreapp1.0;net46</TargetFrameworks>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
-    <StartupObject />
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
 
@@ -16,6 +15,12 @@
     <DefineConstants>NET46</DefineConstants>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>anycpu</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="lib\bindingstest.dll" />
   </ItemGroup>

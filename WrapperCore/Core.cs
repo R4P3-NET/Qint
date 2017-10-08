@@ -11,9 +11,12 @@ namespace WrapperCore
 	{
 		const string libpath = "lib/";
 
-		//[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-		[DllImport("bindingstest", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+		[DllImport("__Internal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+		//[DllImport("bindingstest", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
 		public static extern int get();
+
+        [DllImport("__Internal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern int receive_fn(IntPtr f);//[MarshalAs(UnmanagedType.FunctionPtr)]
 
 		[DllImport("bindingstest", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
 #if NET46
@@ -49,6 +52,32 @@ namespace WrapperCore
 			//con.
 		}
 
-		public static string Hi => "GOOO" + get();
+        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+        public delegate int multiplyWithTwo(int x);
+
+        [MonoPInvokeCallback(typeof(multiplyWithTwo))]
+        public static int multiplyWT(int x) 
+        {
+            return x * 2;
+        }
+        static multiplyWithTwo mwt = new multiplyWithTwo(multiplyWT);
+
+        public static string Hi {
+            get
+            {
+                Console.WriteLine(Marshal.GetFunctionPointerForDelegate(mwt));
+                return "good" + receive_fn(Marshal.GetFunctionPointerForDelegate(mwt));
+            }
+        }
+
+        public static void Main(String[] args) {
+           // Console.WriteL(ine("GOOO" + get() + " " + receive_fn(mwt));
+        }
+	}
+
+	public class MonoPInvokeCallbackAttribute : System.Attribute
+	{
+		private Type type;
+		public MonoPInvokeCallbackAttribute(Type t) { type = t; }
 	}
 }
