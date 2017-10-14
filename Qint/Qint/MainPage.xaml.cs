@@ -8,14 +8,11 @@ using Qint.Wrapper;
 
 namespace Qint
 {
-	public partial class MainPage : ContentPage
+	public partial class MainPage : TabbedPage
 	{
 		public MainPage()
 		{
 			InitializeComponent();
-
-			namedeinerwahl.Text = Core.Hi;
-			Core.Log();
 
 		}
 	}

@@ -1,13 +1,38 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:Qint"
              xmlns:wc="clr-namespace:WrapperCore;assembly=WrapperCore"
-             x:Class="Qint.MainPage">
+             x:Class="Qint.MainPage">  
 
-    <Label Text="Test"
-           VerticalOptions="Center" 
-           HorizontalOptions="Center" 
-           x:Name="namedeinerwahl"/>
+    <NavigationPage Title="{local:Translate CurrentChannelPageTitle}"> <!-- Icon="schedule.png" --> 
+        <x:Arguments>
+            <local:CurrentChannelPage />
+        </x:Arguments>
+    </NavigationPage>
 
-</ContentPage>
+    <NavigationPage Title="{local:Translate ChatOverviewPageTitle}"> <!-- Icon="schedule.png" --> 
+        <x:Arguments>
+            <local:ChatOverviewPage />
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage Title="{local:Translate ChannelOverviewPageTitle}"> <!-- Icon="schedule.png" --> 
+        <x:Arguments>
+            <local:ChannelOverviewPage />
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage Title="{local:Translate ServerPageTitle}"> <!-- Icon="schedule.png" --> 
+        <x:Arguments>
+            <local:ServerPage />
+        </x:Arguments>
+    </NavigationPage>
+
+    <NavigationPage Title="{local:Translate SettingsPageTitle}"> <!-- Icon="schedule.png" --> 
+        <x:Arguments>
+            <local:SettingsPage />
+        </x:Arguments>
+    </NavigationPage>
+
+</TabbedPage>
